@@ -1,0 +1,7 @@
+<?xml version = "1.0" encoding="utf-8"?>
+<fisier>
+ <child> "Raid has Started" </child>
+ <data>"buna ziua"</data>
+ <child>"Raid has Ended"</child>
+ <data>"buna seara" </data>
+</fisier>
