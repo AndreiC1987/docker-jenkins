@@ -1,8 +1,9 @@
 import random
-import schedule
+#import schedule
 import datetime
 import time
 from bs4 import BeautifulSoup
+
 
 class Elf:
     def __init__(self, name, dodge, life=200, attack=100, defense=50):
@@ -21,7 +22,7 @@ class Elf:
 
     def dodge_succes(self, dodge, defense):
         self.dodge = dodge + defense
-        dodge = random.randint(1, 100)
+        dodge = random.randint(50, 100)
         if dodge <= self.dodge:
             return True
         return False
@@ -74,17 +75,17 @@ class Witch:
 
 
 def start():
-    #with open('fisier.xml') as text:
-     #   return text.readlines()[0]
+    # with open('fisier.xml') as text:
+    #    return text.readlines()[0]
     with open("fisier.xml", 'r') as f:
         data = f.read()
     bs = BeautifulSoup(data, 'xml')
     bchild = bs.find_all('child')
     return bchild
 
-#def final():
- #   with open('fisier.xml') as text:
-  #      return text.readlines()[1]
+# def final():
+#    with open('fisier.xml') as text:
+#        return text.readlines()[1]
 
 
 def raid(*args):
@@ -104,10 +105,10 @@ if __name__ == "__main__":
     now = datetime.datetime.now()
     data1 = now.hour, ":", now.minute + 1
     data2 = str(data1[0])+data1[1]+str(data1[2])
-    #Gigi.charge(100, Timmy.getName())
+    # Gigi.charge(100, Timmy.getName())
 
-    schedule.every().day.at(data2).do(raid)
-    while True:
-        schedule.run_pending()
-        time.sleep(now.minute +2)
-        print(start()[1].text)
+    # schedule.every().day.at(data2).do(raid)
+    # while True:
+    #     schedule.run_pending()
+    #     time.sleep(now.minute + 2)
+    #     print(start()[1].text)
