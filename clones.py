@@ -1,8 +1,8 @@
 import random
-#import schedule
+import schedule
 import datetime
 import time
-from bs4 import BeautifulSoup
+#from bs4 import BeautifulSoup
 
 
 class Elf:
@@ -75,17 +75,18 @@ class Witch:
 
 
 def start():
-    # with open('fisier.xml') as text:
-    #    return text.readlines()[0]
-    with open("fisier.xml", 'r') as f:
-        data = f.read()
-    bs = BeautifulSoup(data, 'xml')
-    bchild = bs.find_all('child')
-    return bchild
+    with open('fisier.xml') as text:
+       return text.readlines()[0]
+    # with open("fisier.xml", 'r') as f:
+    #     data = f.read()
+    # bs = BeautifulSoup(data, 'xml')
+    # bchild = bs.find_all('child')
+    # return bchild
 
-# def final():
-#    with open('fisier.xml') as text:
-#        return text.readlines()[1]
+
+def final():
+   with open('fisier.xml') as text:
+       return text.readlines()[1]
 
 
 def raid(*args):
@@ -97,7 +98,7 @@ def raid(*args):
 
 
 if __name__ == "__main__":
-    print(start()[0].text)
+    print(start()[0])
     Gigi = Elf("Gigi", 150, 2)
     Timmy = Dwarf("Timmy", 100, 3)
     Galadriel = Witch("Galadriel", 50, 4)
@@ -107,8 +108,8 @@ if __name__ == "__main__":
     data2 = str(data1[0])+data1[1]+str(data1[2])
     # Gigi.charge(100, Timmy.getName())
 
-    # schedule.every().day.at(data2).do(raid)
-    # while True:
-    #     schedule.run_pending()
-    #     time.sleep(now.minute + 2)
-    #     print(start()[1].text)
+    schedule.every().day.at(data2).do(raid)
+    while True:
+        schedule.run_pending()
+        time.sleep(now.minute + 2)
+        print(start()[1])
