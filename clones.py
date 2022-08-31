@@ -1,7 +1,8 @@
 import random
+import time
+
 import schedule
 import datetime
-import time
 # from bs4 import BeautifulSoup
 
 
@@ -18,11 +19,13 @@ class Elf:
 
     def charge(self, attack, *args):
         self.attack = attack
+        attack = random.randint(10, 500)
         print("Dealing", attack, "to", args.__str__())
 
-    def dodge_succes(self, dodge, defense):
+    def dodge_succes(self, dodge, defense, *args):
         self.dodge = dodge + defense
-        dodge = random.randint(50, 100)
+        dodge = random.randint(1, 10)
+        print("dodging", dodge, "from", args.__str__())
         if dodge <= self.dodge:
             return True
         return False
@@ -42,7 +45,8 @@ class Dwarf:
 
     def charge(self, charge_chance, attack, *args):
         self.charge_chance = charge_chance + attack
-        print("Dealing", attack, "to", args.__str__())
+        attack = random.randint(20, 80)
+        print("Dealing", charge_chance + attack, "to", args.__str__())
 
     def blocking(self, block, defense, *args):
         self.block = block + defense
@@ -68,7 +72,7 @@ class Witch:
     def damage(self, spell_damage, weaken, *args):
         self.spell_damage = spell_damage + weaken
         spell_damage = random.randint(1, 15)
-        print("Dealing", spell_damage, weaken, "to", args.__str__())
+        print("Dealing", spell_damage + weaken, "to", args.__str__())
         if spell_damage <= 5:
             return True
         return False
@@ -89,16 +93,22 @@ def final():
         return text.readlines()[1]
 
 
-def raid(*args):
+def raid():
     print("----------------------------------------")
     Gigi.charge(100, Timmy.get_name())
     Timmy.charge(2, 100, Galadriel.get_name())
     Galadriel.damage(20, 5, Gigi.get_name())
+    time.sleep(10)
+    Timmy.charge(Gigi.get_name(), 120)
+    Galadriel.damage(Timmy.get_name(), 80)
+    Gigi.charge(Galadriel.get_name(), 210)
+    time.sleep(10)
+    Gigi.dodge_succes(Galadriel.damage(100, 50), 10)
     print("----------------------------------------")
 
 
 if __name__ == "__main__":
-    print(start()[0])
+
     Gigi = Elf("Gigi", 150, 2)
     Timmy = Dwarf("Timmy", 100, 3)
     Galadriel = Witch("Galadriel", 50, 4)
@@ -107,12 +117,11 @@ if __name__ == "__main__":
     data1 = now.hour, ":", now.minute, ":", now.second
     data2 = str(data1[0])+data1[1]+str(data1[2])+data1[3]+str(data1[4])
     # Gigi.charge(100, Timmy.getName())
-
-    schedule.every(1).minutes.do(raid)
-    while True:
+    schedule.every(10).seconds.do(raid())
+    i = 1
+    while i < 4:
         schedule.run_pending()
-        time.sleep(1)
-        print(start()[1])
-
-    # print(data1[1])
-    # print(data2)
+        schedule.run_pending()
+        schedule.run_pending()
+        break
+    i += 1

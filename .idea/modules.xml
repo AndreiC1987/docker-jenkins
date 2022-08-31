@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/jenkins app.iml" filepath="$PROJECT_DIR$/.idea/jenkins app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/jenkins_app.iml" filepath="$PROJECT_DIR$/.idea/jenkins_app.iml" />
     </modules>
   </component>
 </project>
