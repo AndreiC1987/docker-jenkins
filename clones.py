@@ -2,7 +2,7 @@ import random
 import schedule
 import datetime
 import time
-#from bs4 import BeautifulSoup
+# from bs4 import BeautifulSoup
 
 
 class Elf:
@@ -13,7 +13,7 @@ class Elf:
         self.dodge = dodge
         self.name = name
 
-    def getName(self):
+    def get_name(self):
         return self.name
 
     def charge(self, attack, *args):
@@ -37,14 +37,14 @@ class Dwarf:
         self.charge_chance = charge_chance
         self.name = name
 
-    def getName(self):
+    def get_name(self):
         return self.name
 
     def charge(self, charge_chance, attack, *args):
         self.charge_chance = charge_chance + attack
         print("Dealing", attack, "to", args.__str__())
 
-    def Blocking(self, block, defense, *args):
+    def blocking(self, block, defense, *args):
         self.block = block + defense
         print("Blocking", block, "to", args.__str__())
         block = random.randint(1, 10)
@@ -62,7 +62,7 @@ class Witch:
         self.weaken = weaken
         self.name = name
 
-    def getName(self):
+    def get_name(self):
         return self.name
 
     def damage(self, spell_damage, weaken, *args):
@@ -76,7 +76,7 @@ class Witch:
 
 def start():
     with open('fisier.xml') as text:
-       return text.readlines()[0]
+        return text.readlines()[0]
     # with open("fisier.xml", 'r') as f:
     #     data = f.read()
     # bs = BeautifulSoup(data, 'xml')
@@ -85,15 +85,15 @@ def start():
 
 
 def final():
-   with open('fisier.xml') as text:
-       return text.readlines()[1]
+    with open('fisier.xml') as text:
+        return text.readlines()[1]
 
 
 def raid(*args):
     print("----------------------------------------")
-    Gigi.charge(100, Timmy.getName())
-    Timmy.charge(2, 100, Galadriel.getName())
-    Galadriel.damage(20, 5, Gigi.getName())
+    Gigi.charge(100, Timmy.get_name())
+    Timmy.charge(2, 100, Galadriel.get_name())
+    Galadriel.damage(20, 5, Gigi.get_name())
     print("----------------------------------------")
 
 
@@ -104,12 +104,15 @@ if __name__ == "__main__":
     Galadriel = Witch("Galadriel", 50, 4)
 
     now = datetime.datetime.now()
-    data1 = now.hour, ":", now.minute + 1
-    data2 = str(data1[0])+data1[1]+str(data1[2])
+    data1 = now.hour, ":", now.minute, ":", now.second
+    data2 = str(data1[0])+data1[1]+str(data1[2])+data1[3]+str(data1[4])
     # Gigi.charge(100, Timmy.getName())
 
-    schedule.every().day.at(data2).do(raid)
+    schedule.every(1).minutes.do(raid)
     while True:
         schedule.run_pending()
-        time.sleep(now.minute + 2)
+        time.sleep(1)
         print(start()[1])
+
+    # print(data1[1])
+    # print(data2)
